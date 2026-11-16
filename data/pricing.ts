@@ -123,7 +123,7 @@ export const contact = {
 export const site = {
   brand: "Raiment Web",
   owner: "Travis James",
-  url: "https://pricing.raimentweb.com.ng",
+  url: "https://pricing.raimentstore.com.ng",
   locality: "Asaba",
   region: "Delta State",
   country: "NG",

@@ -53,7 +53,7 @@ const background = Buffer.from(
        <text x="70" y="262" font-size="68" font-weight="800">Websites that</text>
        <text x="70" y="342" font-size="68" font-weight="800">bring you</text>
        <text x="70" y="422" font-size="68" font-weight="800">customers.</text>
-       <text x="70" y="520" font-size="30" font-weight="600" fill="#DDD6FE">raimentweb.com.ng</text>
+       <text x="70" y="520" font-size="30" font-weight="600" fill="#DDD6FE">pricing.raimentstore.com.ng</text>
      </g>
    </svg>`,
 );
