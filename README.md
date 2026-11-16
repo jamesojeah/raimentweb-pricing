@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Raiment Web – pricing page
 
-## Getting Started
-
-First, run the development server:
+One-page pricing site for raimentweb.com.ng. Next.js (App Router), TypeScript, Tailwind CSS. No backend.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Before you deploy: replace the placeholders
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Open `data/pricing.ts` and edit the `contact` block at the top:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```ts
+export const contact = {
+  whatsappNumber: "234XXXXXXXXXX",        // <- your real number
+  email: "hello@raimentweb.com.ng",       // <- an inbox that exists
+  instagram: "https://instagram.com/raimentweb",
+  facebook: "https://facebook.com/raimentweb",
+};
+```
 
-## Learn More
+- `whatsappNumber`: country code + number, no `+`, no spaces, no leading 0. Example: `2348012345678`.
+- Until you change it, every WhatsApp button opens a broken link.
+- Leave any of `email`, `instagram`, `facebook` as `""` and that link disappears from the footer.
 
-To learn more about Next.js, take a look at the following resources:
+## Where to put your photo
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Save your photo as **`public/travis.jpg`** (replace the file that is there).
+   A portrait photo works best (about 3:4, at least 1000px wide).
+2. Make the sharing image (what WhatsApp and Facebook show when someone shares your link):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   npm run og
+   ```
 
-## Deploy on Vercel
+   This writes **`public/og-travis.jpg`** (1200×630) from your photo.
+3. If `public/travis.jpg` is missing, the page shows a neutral placeholder instead of breaking the build.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## How to change prices (and any other words)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Everything on the page comes from **`data/pricing.ts`**. Nothing is typed into the components.
+
+- **Prices:** edit the numbers in the `PRICES` block near the top. Every label (`₦180,000`, `From ₦600,000`, `₦50,000/month`), the FAQ answer about renewal, the page description and the Google schema are built from those numbers.
+- **Package features, delivery time, WhatsApp message:** edit the `packages` array.
+- **Comparison table:** edit `comparisonRows` (`true` = tick, `false` = dash, text = shown as written).
+- **Add-ons:** edit `addOns`.
+- **Quick picker:** edit `pickerOptions`. Each chip has a `packageId` (`starter`, `business`, `store` or `custom`) which is the card it highlights.
+- **FAQ, steps, headings, hero text:** edit `faqs`, `steps` and `site`.
+
+Note: the "I sell on WhatsApp/Instagram" chip points to the Starter Page. Change its `packageId` to `"store"` if you would rather send those people to the Online Store (and update its `reason` line to match).
+
+## Deploy to Vercel
+
+1. Put the project on GitHub (create a new repo, then `git remote add origin <url>` and `git push -u origin main`).
+2. Go to [vercel.com/new](https://vercel.com/new), import the repo, and click **Deploy**. The defaults are correct; there are no environment variables.
+3. Add your domain: Project → **Settings → Domains** → add `raimentweb.com.ng`, then set the DNS records Vercel shows you at your domain registrar.
+4. After changing anything in `data/pricing.ts`, push to GitHub. Vercel rebuilds and publishes by itself.
+
+If `raimentweb.com.ng` is not the final address, change `site.url` in `data/pricing.ts` so the share image and Google schema point to the right place.
+
+## Social share image
+
+After you deploy, paste your link into WhatsApp or the [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) to check the preview. They cache old previews, so use the debugger's "Scrape Again" if you change the image.
