@@ -55,10 +55,10 @@ Note: the "I sell on WhatsApp/Instagram" chip points to the Starter Page. Change
 
 1. Put the project on GitHub (create a new repo, then `git remote add origin <url>` and `git push -u origin main`).
 2. Go to [vercel.com/new](https://vercel.com/new), import the repo, and click **Deploy**. The defaults are correct; there are no environment variables.
-3. Add your domain: Project → **Settings → Domains** → add `raimentweb.com.ng`, then set the DNS records Vercel shows you at your domain registrar.
+3. Add your domain: Project → **Settings → Domains** → add `pricing.raimentweb.com.ng`, then set the DNS records Vercel shows you at your domain registrar. (The root `raimentweb.com.ng` is used by the store project, so this page lives on a subdomain.)
 4. After changing anything in `data/pricing.ts`, push to GitHub. Vercel rebuilds and publishes by itself.
 
-If `raimentweb.com.ng` is not the final address, change `site.url` in `data/pricing.ts` so the share image and Google schema point to the right place.
+If `pricing.raimentweb.com.ng` is not the final address, change `site.url` in `data/pricing.ts` so the share image and Google schema point to the right place.
 
 ## Social share image
 
